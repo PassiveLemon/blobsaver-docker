@@ -3,15 +3,16 @@ Docker container for [Blobsaver](https://github.com/airsquared/blobsaver)</br>
 The only purpose of this container is to automatically grab blobs in the background on systems that can't really natively run blobsaver. </br>
 
 ## Setup </br>
-You will need to already have a functional blobsaver.xml. Currently, this contaienr does not have the ability to generate it automatically. There are ways to get this, mainly being to just see if your distro has a supported blobsaver package and generating it from that. Otherwise, if you already know the needed details for blob saving functionality with Blobsaver, you can just make the XML yourself.</br>
+<b>You will need to already have a functional blobsaver.xml</b></br>
+Currently, this container does not have the ability to generate it automatically. There are ways to get this, mainly being to just see if your distro has a supported blobsaver package and generating it from that. Otherwise, if you already know the needed details for blob saving functionality with Blobsaver, you can just make the XML yourself.</br>
 
-By default, it will check every 5 minutes. You can change this by building it yourself. </br>
+By default, it will check every 5 minutes. You can change this by building it yourself and modifying the cron line. </br>
 
 Find a place to store your blobs. Something like `/home/(user)/Documents/Blobs/`. This will be needed later. </br>
 
 ### Docker container </br>
 ```
-docker run -d --name (container name) -v (path to blob directory):/blobsaver/blobs/ -e VERSION=(version) (image name)
+docker run -d --name (container name) -v (path to blob directory):/blobsaver/blobs/ -e VERSION=(version) passivelemon/blobsaver-docker:latest
 ```
 | Operator | Need | Details |
 |:-|:-|:-|
@@ -19,11 +20,11 @@ docker run -d --name (container name) -v (path to blob directory):/blobsaver/blo
 | `--name (container name)` | No | Sets the name of the container to the following word. You can change this to whatever you want. |
 | `-v (path to blob directory):/blobsaver/blobs/` | Yes | Sets the folder that holds your blobs and the xml. This should be the place you just chose. Make sure your `blobsaver.xml` is in this location. |
 | `-e VERSION=(version)` | Yes | Sets the version of Blobsaver that the container will download. Must be a supported version found on the Blobsaver. Use 3.5.0 at the minimum because that is when CLI functionality was added. |
-| `(image name)` | Yes | The name of the image you built. |
+| `passivelemon/blobsaver-docker:latest` | Yes | The repository on Docker hub. By default, it is the latest version that I have published. |
 
 #### Example:
 ```
-docker run -d --name blobsaver-docker -v /host/lemon/Documents/Blobs/:/blobsaver/blobs/ -e VERSION=3.5.0 blobsaver-docker-image
+docker run -d --name blobsaver-docker -v /host/lemon/Documents/Blobs/:/blobsaver/blobs/ -e VERSION=3.5.0 passivelemon/blobsaver-docker:latest
 ```
 
 ### Xml </br>
