@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE preferences SYSTEM "http://java.sun.com/dtd/preferences.dtd">
+<preferences EXTERNAL_XML_VERSION="1.0">
+  <root type="user">
+    <map/>
+    <node name="airsquared">
+      <map/>
+      <node name="blobsaver">
+        <map/>
+        <node name="app">
+          <map/>
+          <node name="Saved Devices">
+            <map/>
+            <node name="#######">
+              <map>
+                <entry key="ECID" value="#############"/>
+                <entry key="Save Path" value="/blobsaver/blobs/#######"/>
+                <entry key="Device Identifier" value="#########"/>
+                <entry key="Include Betas" value="true"/>
+                <entry key="Apnonce" value="################################################################"/>
+                <entry key="Generator" value="0x################"/>
+                <entry key="Save in background" value="true"/>
+              </map>
+            </node>
+          </node>
+        </node>
+      </node>
+    </node>
+  </root>
+</preferences>

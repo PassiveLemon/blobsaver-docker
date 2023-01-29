@@ -1,7 +1,7 @@
 FROM fedora:latest
 
 RUN dnf upgrade -y &&\
-    dnf install -y curl
+    dnf install -y curl cronie
 
 COPY entrypoint.sh /
 
