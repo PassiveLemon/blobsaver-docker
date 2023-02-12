@@ -1,4 +1,10 @@
 # blobsaver-docker </br>
+
+[![Repo](https://img.shields.io/badge/Docker-Repo-007EC6?labelColor-555555&color-007EC6&logo=docker&logoColor=fff&style=flat-square)](https://hub.docker.com/r/passivelemon/blobsaver-docker)
+[![Version](https://img.shields.io/docker/v/passivelemon/onthespot-docker/latest?labelColor-555555&color-007EC6&style=flat-square)](https://hub.docker.com/r/passivelemon/blobsaver-docker)
+[![Size](https://img.shields.io/docker/image-size/passivelemon/onthespot-docker/latest?sort=semver&labelColor-555555&color-007EC6&style=flat-square)](https://hub.docker.com/r/passivelemon/blobsaver-docker)
+[![Pulls](https://img.shields.io/docker/pulls/passivelemon/onthespot-docker?labelColor-555555&color-007EC6&style=flat-square)](https://hub.docker.com/r/passivelemon/blobsaver-docker)
+
 Docker container for [Blobsaver](https://github.com/airsquared/blobsaver)</br>
 The only purpose of this container is to automatically grab blobs in the background on systems that can't really natively run blobsaver. </br>
 
