@@ -3,10 +3,10 @@ FROM fedora:latest
 RUN dnf upgrade -y &&\
     dnf install -y curl cronie
 
-COPY entrypoint.sh /
+COPY entrypoint.sh /blobsaver/
 
-RUN chmod +x /entrypoint.sh
+RUN chmod +x /blobsaver/entrypoint.sh
 
 ENV VERSION=""
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/blobsaver/entrypoint.sh"]
