@@ -9,5 +9,5 @@ if [ ! -e /opt/blobsaver/bin/blobsaver ]; then
 fi
 
 export BLOBSAVER_CLI_ONLY
-(crontab -l 2>/dev/null; echo "*/5 * * * * /opt/blobsaver/bin/blobsaver --import=/blobsaver/blobs/blobsaver.xml --save-path=/blobsaver/blobs --include-betas --background-autosave") | crontab -
+(crontab -l 2>/dev/null; echo "$CRON_SCHEDULE /opt/blobsaver/bin/blobsaver --import=/blobsaver/blobs/blobsaver.xml --save-path=/blobsaver/blobs --include-betas --background-autosave") | crontab -
 crond -f

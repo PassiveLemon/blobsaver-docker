@@ -7,6 +7,7 @@ COPY entrypoint.sh /blobsaver/
 
 RUN chmod +x /blobsaver/entrypoint.sh
 
-ENV VERSION=""
+ENV VERSION="" \
+    CRON_SCHEDULE="*/5 * * * *"
 
 ENTRYPOINT ["/blobsaver/entrypoint.sh"]
