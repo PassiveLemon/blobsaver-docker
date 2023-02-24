@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 mkdir -p /blobsaver/
 cd /blobsaver/
@@ -9,5 +9,8 @@ if [ ! -e /opt/blobsaver/bin/blobsaver ]; then
 fi
 
 export BLOBSAVER_CLI_ONLY
-(crontab -l 2>/dev/null; echo "*/5 * * * * /opt/blobsaver/bin/blobsaver --import=/blobsaver/blobs/blobsaver.xml --save-path=/blobsaver/blobs --include-betas --background-autosave") | crontab -
+echo "|| Manually saving blobs once. ||"
+/opt/blobsaver/bin/blobsaver --import=/blobsaver/blobs/blobsaver.xml --save-path=/blobsaver/blobs ${BLOBARG}
+echo "|| Done. Continuing with cronjob. ||"
+(crontab -l 2>/dev/null; echo "${CRONTIME} /opt/blobsaver/bin/blobsaver --import=/blobsaver/blobs/blobsaver.xml --save-path=/blobsaver/blobs ${BLOBENV}") | crontab -
 crond -f

@@ -18,19 +18,21 @@ Find a place to store your blobs. Something like `/home/(user)/Documents/Blobs/`
 
 ### Docker container </br>
 ```
-docker run -d --name (container name) -v (path to blob directory):/blobsaver/blobs/ -e VERSION=(version) passivelemon/blobsaver-docker:latest
+docker run -d --name (container name) -v (path to blob directory):/blobsaver/blobs/ -e VERSION=(version) -e CRONTIME=(time in cron format) -e BLOBARG=(arguments for blobsaver) passivelemon/blobsaver-docker:latest
 ```
 | Operator | Need | Details |
 |:-|:-|:-|
 | `-d` | Yes | will run the container in the background. |
 | `--name (container name)` | No | Sets the name of the container to the following word. You can change this to whatever you want. |
 | `-v (path to blob directory):/blobsaver/blobs/` | Yes | Sets the folder that holds your blobs and the xml. This should be the place you just chose. Make sure your `blobsaver.xml` is in this location. |
-| `-e VERSION=(version)` | Yes | Sets the version of Blobsaver that the container will download. Must be a supported version found on the Blobsaver. Use 3.5.0 at the minimum because that is when CLI functionality was added. |
+| `-e VERSION=(version)` | No | Sets the version of Blobsaver that the container will download. Must be a supported version found on the Blobsaver Github. Use 3.5.0 at the minimum because that is when CLI functionality was added. Defaults to 3.5.0 if not set. |
+| `-e CRONTIME=(time in cron format)` | No | Sets the interval in which the cron job runs. Defaults to every 5 minutes if not set. (`*/5 * * * *`) |
+| `-e BLOBARG=(arguments for blobsaver)` | No | Sets the arguments that Blobsaver will use when ran. Defaults to `--include-betas --background-autosave` if not set. |
 | `passivelemon/blobsaver-docker:latest` | Yes | The repository on Docker hub. By default, it is the latest version that I have published. |
 
 #### Example:
 ```
-docker run -d --name blobsaver-docker -v /host/lemon/Documents/Blobs/:/blobsaver/blobs/ -e VERSION=3.5.0 passivelemon/blobsaver-docker:latest
+docker run -d --name blobsaver-docker -v /host/lemon/Documents/Blobs/:/blobsaver/blobs/ -e VERSION='3.5.0' -e CRONTIME='*/15 * * * *' -e BLOBARG='--background-autosave' passivelemon/blobsaver-docker:latest
 ```
 
 ### Xml </br>
