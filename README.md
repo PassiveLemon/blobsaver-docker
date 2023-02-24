@@ -27,7 +27,7 @@ docker run -d --name (container name) -v (path to blob directory):/blobsaver/blo
 | `-v (path to blob directory):/blobsaver/blobs/` | Yes | Sets the folder that holds your blobs and the xml. This should be the place you just chose. Make sure your `blobsaver.xml` is in this location. |
 | `-e VERSION=(version)` | No | Sets the version of Blobsaver that the container will download. Must be a supported version found on the Blobsaver Github. Use 3.5.0 at the minimum because that is when CLI functionality was added. Defaults to 3.5.0 if not set. |
 | `-e CRONTIME=(time in cron format)` | No | Sets the interval in which the cron job runs. Defaults to every 5 minutes if not set. (`*/5 * * * *`) |
-| `-e BLOBARG=(arguments for blobsaver)` | No | Sets the arguments that Blobsaver will use when ran. Defaults to `--include-betas --background-autosave` if not set. |
+| `-e BLOBARG=(arguments for blobsaver)` | No | Sets the arguments that Blobsaver will use when ran. Defaults to `--include-betas --background-autosave` if not set. Do not use `--import=/blobsaver/blobs/blobsaver.xml` or `--save-path=/blobsaver/blobs` as they are what set the directory for host mounting. |
 | `passivelemon/blobsaver-docker:latest` | Yes | The repository on Docker hub. By default, it is the latest version that I have published. |
 
 #### Example:
