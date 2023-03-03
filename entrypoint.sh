@@ -12,5 +12,5 @@ export BLOBSAVER_CLI_ONLY
 echo "|| Manually saving blobs once. ||"
 /opt/blobsaver/bin/blobsaver --import=/blobsaver/blobs/blobsaver.xml --save-path=/blobsaver/blobs ${BLOBARG}
 echo "|| Done. Continuing with cronjob. ||"
-(crontab -l 2>/dev/null; echo "${CRONTIME} /opt/blobsaver/bin/blobsaver --import=/blobsaver/blobs/blobsaver.xml --save-path=/blobsaver/blobs ${BLOBENV}") | crontab -
+(crontab -l 2>/dev/null; echo "${CRONTIME} /opt/blobsaver/bin/blobsaver --import=/blobsaver/blobs/blobsaver.xml --save-path=/blobsaver/blobs ${BLOBARG}") | crontab -
 crond -f
