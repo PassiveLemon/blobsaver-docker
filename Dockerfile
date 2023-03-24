@@ -1,7 +1,7 @@
-FROM fedora:latest
+FROM frolvlad/alpine-glibc:latest
 
-RUN dnf upgrade -y &&\
-    dnf install -y curl cronie
+RUN apk update && apk upgrade &&\
+    apk add curl busybox-openrc
 
 COPY entrypoint.sh /blobsaver/
 

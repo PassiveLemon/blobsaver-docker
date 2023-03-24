@@ -16,6 +16,8 @@ By default, it will check every 5 minutes. You can change this by building it yo
 
 Find a place to store your blobs. Something like `/home/(user)/Documents/Blobs/`. This will be needed later. </br>
 
+I also highly recommend limiting the CPU usage of the container as when the program runs, it will spike your CPU usage. </br>
+
 ### Docker container </br>
 ```
 docker run -d --name (container name) -v (path to blob directory):/blobsaver/blobs/ -e VERSION=(version) -e CRONTIME=(time in cron format) -e BLOBARG=(arguments for blobsaver) passivelemon/blobsaver-docker:latest
