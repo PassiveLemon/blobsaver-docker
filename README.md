@@ -12,8 +12,6 @@ The only purpose of this container is to automatically grab blobs in the backgro
 <b>You will need to already have a functional blobsaver.xml</b></br>
 Currently, this container does not have the ability to generate it automatically. There are ways to get this, mainly being to just see if your distro has a supported blobsaver package and generating it from that. Otherwise, if you already know the needed details for blob saving functionality with Blobsaver, you can just make the XML yourself.</br>
 
-By default, it will check every 5 minutes. You can change this by building it yourself and modifying the cron line. </br>
-
 Find a place to store your blobs. Something like `/home/(user)/Documents/Blobs/`. This will be needed later. </br>
 
 I also highly recommend limiting the CPU usage of the container as when the program runs, it will spike your CPU usage. </br>
