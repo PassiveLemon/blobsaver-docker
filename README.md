@@ -48,3 +48,6 @@ An example XML file is provided in the repo. Make sure to remove the comments af
     <entry key="Generator" value="0x################"/>                                               - Your generator. Can be found using 3rd party tools.
     <entry key="Save in background" value="true"/>                                                    - Set this to true so the blobs get saved automatically in the background.
 ```
+
+### Other </br>
+If you are getting high CPU Iowait use, check and make sure the container is working properly.
