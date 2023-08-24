@@ -22,6 +22,7 @@ docker run -d --name blobsaver-docker -v (path to blob directory):/blobsaver/blo
 ```
 
 ### Docker Compose
+```
 version: '3.3'
 services:
   blobsaver-docker:
@@ -33,7 +34,7 @@ services:
       STARTTRIGGER: '1'
       CRONTIME: '*/5 * * * *'
       BLOBARG: '--include-betas --background-autosave'
-
+```
 
 | Operator | Need | Details |
 |:-|:-|:-|
@@ -51,6 +52,7 @@ services:
 docker run -d --name blobsaver-docker -v /home/docker/Containers/Blobsaver-docker/:/blobsaver/blobs/ -e STARTTRIGGER='0' -e CRONTIME='*/15 * * * *' -e BLOBARG='--background-autosave' passivelemon/blobsaver-docker:latest
 ```
 ### Docker Compose
+```
 version: '3.3'
 services:
   blobsaver-docker:
@@ -62,6 +64,7 @@ services:
       STARTTRIGGER: '0'
       CRONTIME: '*/15 * * * *'
       BLOBARG: '--background-autosave'
+```
 
 ### Xml </br>
 An example XML file is provided in the repo. Make sure to remove the comments after the lines. </br>
