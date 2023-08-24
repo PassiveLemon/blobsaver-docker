@@ -6,10 +6,10 @@ RUN apk add --no-cache curl tar busybox-openrc
 
 RUN mkdir -p /blobsaver/source/
 
-RUN curl -Lo /blobsaver/source/blobsaver.tar.gz https://github.com/airsquared/blobsaver/releases/download/v${VERSION}/blobsaver-${VERSION}.tar.gz
+RUN curl -Lo /blobsaver/source/blobsaver.tgz https://github.com/airsquared/blobsaver/releases/download/v${VERSION}/blobsaver-${VERSION}.tgz
 WORKDIR /blobsaver/source/
-RUN tar -xzvf blobsaver.tar.gz &&\
-    rm blobsaver.tar.gz
+RUN tar -xzvf blobsaver.tgz &&\
+    rm blobsaver.tgz
 
 COPY entrypoint.sh /blobsaver/
 
