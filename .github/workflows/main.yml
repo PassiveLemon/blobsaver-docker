@@ -47,13 +47,12 @@ jobs:
             --build-arg VERSION=${{ steps.get_latest_release_tag.outputs.latest_tag }} \
             --provenance=false \
             --platform linux/amd64 \
-            --tag passivelemon/blobsaver-docker:${{ steps.get_latest_release_tag.outputs.latest_tag }} \
-            --build-arg VERSION=${{ steps.get_latest_release_tag.outputs.latest_tag }} \
+            --tag ${{ secrets.DOCKER_USERNAME }}/blobsaver-docker:${{ steps.get_latest_release_tag.outputs.latest_tag }} \
             .
 
           docker buildx build --push \
             --build-arg VERSION=${{ steps.get_latest_release_tag.outputs.latest_tag }} \
             --provenance=false \
             --platform linux/amd64 \
-            --tag passivelemon/blobsaver-docker:latest \
+            --tag ${{ secrets.DOCKER_USERNAME }}/blobsaver-docker:latest \
             .

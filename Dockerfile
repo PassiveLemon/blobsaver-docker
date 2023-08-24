@@ -4,16 +4,25 @@ ARG VERSION
 
 RUN apk add --no-cache curl tar busybox-openrc
 
-RUN mkdir -p /blobsaver/source/
+RUN mkdir -p /opt/blobsaver/source/ &&\
+    mkdir -p /usr/local/bin/
 
-RUN curl -Lo /blobsaver/source/blobsaver.tgz https://github.com/airsquared/blobsaver/releases/download/v${VERSION}/blobsaver-${VERSION}.tgz
-WORKDIR /blobsaver/source/
-RUN tar -xzvf blobsaver.tgz &&\
-    rm blobsaver.tgz
+COPY entrypoint.sh /opt/blobsaver/
 
-COPY entrypoint.sh /blobsaver/
+RUN chmod -R 755 /opt/blobsaver/ &&\
+    chmod +x /opt/blobsaver/entrypoint.sh
 
-RUN chmod +x /blobsaver/entrypoint.sh
+WORKDIR /opt/blobsaver/source/
+
+RUN curl -Lo ./blobsaver.tgz https://github.com/airsquared/blobsaver/releases/download/v${VERSION}/blobsaver-${VERSION}.tgz
+
+RUN tar -xzvf ./blobsaver.tgz &&\
+    ln -s /opt/blobsaver/source/blobsaver/bin/blobsaver /usr/local/bin/blobsaver &&\
+    rm ./blobsaver.tgz
+
+RUN chmod +x /opt/blobsaver/source/blobsaver/bin/blobsaver
+
+WORKDIR /opt/blobsaver/source/blobsaver/bin/
 
 ENV VERSION=$VERSION
 
@@ -21,4 +30,4 @@ ENV STARTTRIGGER="1"
 ENV CRONTIME="*/5 * * * *"
 ENV BLOBARG="--include-betas --background-autosave"
 
-ENTRYPOINT ["/blobsaver/entrypoint.sh"]
+ENTRYPOINT ["/opt/blobsaver/entrypoint.sh"]
