@@ -15,6 +15,8 @@ COPY entrypoint.sh /blobsaver/
 
 RUN chmod +x /blobsaver/entrypoint.sh
 
+ENV VERSION=$VERSION
+
 ENV STARTTRIGGER="1"
 ENV CRONTIME="*/5 * * * *"
 ENV BLOBARG="--include-betas --background-autosave"

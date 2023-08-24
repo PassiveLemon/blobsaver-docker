@@ -1,4 +1,5 @@
 #!/bin/sh
+echo "Blobsaver version $VERSION"
 
 export BLOBSAVER_CLI_ONLY
 if [ "$STARTTRIGGER" = "1" ]; then
