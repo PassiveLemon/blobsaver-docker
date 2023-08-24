@@ -1,4 +1,4 @@
-name: Publish image
+name: Automatic Update
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
         run: |
           LATEST=$(curl -s https://api.github.com/repos/airsquared/blobsaver/releases | jq -r "[.[] | select(.tag_name)] | max_by(.created_at) | .tag_name" | awk '{gsub(/^v/, ""); print}')
           echo "Latest release is ${LATEST}"
-          echo "::set-output name=latest_tag::$LATEST"
+          echo "latest_tag=$LATEST" >> "$GITHUB_OUTPUT"
       
       - name: Check if version already exists
         run: |
