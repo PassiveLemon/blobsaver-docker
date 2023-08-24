@@ -1,0 +1,59 @@
+name: Publish image
+
+on:
+  push:
+    branches: master
+  schedule:
+  - cron: "0 3 * * *"
+
+jobs:
+  setup-build-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get latest release tag
+        id: get_latest_release_tag
+        run: |
+          LATEST=$(curl -s https://api.github.com/repos/airsquared/blobsaver/releases | jq -r "[.[] | select(.tag_name)] | max_by(.created_at) | .tag_name" | awk '{gsub(/^v/, ""); print}')
+          echo "Latest release is ${LATEST}"
+          echo "::set-output name=latest_tag::3.5.1"
+      
+      - name: Check if version already exists
+        run: |
+          CHECK=$(curl -s "https://hub.docker.com/v2/repositories/passivelemon/blobsaver-docker/tags/${{ steps.get_latest_release_tag.outputs.latest_tag }}")
+          echo $CHECK
+          if echo "${CHECK}" | jq -e ".digest" > /dev/null; then
+            echo "Version ${{ steps.get_latest_release_tag.outputs.latest_tag }} already exists. Stopping..."
+            exit 1
+          fi
+          echo "Version ${{ steps.get_latest_release_tag.outputs.latest_tag }} does not already exist. Continuing..."
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Dockerhub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build the image
+        run: |
+          docker buildx create --name mainbuilder --driver docker-container --platform linux/amd64 --use
+          
+          docker buildx build --push \
+            --build-arg VERSION=${{ steps.get_latest_release_tag.outputs.latest_tag }} \
+            --provenance=false \
+            --platform linux/amd64 \
+            --tag passivelemon/blobsaver-docker:${{ steps.get_latest_release_tag.outputs.latest_tag }} \
+            --build-arg VERSION=${{ steps.get_latest_release_tag.outputs.latest_tag }} \
+            .
+
+          docker buildx build --push \
+            --build-arg VERSION=${{ steps.get_latest_release_tag.outputs.latest_tag }} \
+            --provenance=false \
+            --platform linux/amd64 \
+            --tag passivelemon/blobsaver-docker:latest \
+            .
