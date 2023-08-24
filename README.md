@@ -18,18 +18,18 @@ I also highly recommend limiting the CPU usage of the container as when the prog
 
 ### Docker run </br>
 ```
-docker run -d --name blobsaver-docker -v (path to blob directory):/blobsaver/blobs/ -e STARTTRIGGER='1' -e CRONTIME='*/5 * * * *' -e BLOBARG='--include-betas --background-autosave' passivelemon/blobsaver-docker:latest
+docker run -d --name blobsaver-docker -v (path to blob directory):/opt/blobsaver/blobs/ -e STARTTRIGGER='1' -e CRONTIME='*/5 * * * *' -e BLOBARG='--include-betas --background-autosave' passivelemon/blobsaver-docker:latest
 ```
 
 ### Docker Compose
-```
+```yml
 version: '3.3'
 services:
   blobsaver-docker:
     image: passivelemon/blobsaver-docker:latest
     container_name: blobsaver-docker
     volumes:
-      - (path to blob directory):/blobsaver/blobs/
+      - (path to blob directory):/opt/blobsaver/blobs/
     environment:
       STARTTRIGGER: '1'
       CRONTIME: '*/5 * * * *'
@@ -40,26 +40,26 @@ services:
 |:-|:-|:-|
 | `-d` | Yes | will run the container in the background. |
 | `--name (container name)` | No | Sets the name of the container to the following word. You can change this to whatever you want. |
-| `-v (path to blob directory):/blobsaver/blobs/` | Yes | Sets the folder that holds your blobs and the xml. This should be the place you just chose. Make sure your `blobsaver.xml` is in this location. |
+| `-v (path to blob directory):/opt/blobsaver/blobs/` | Yes | Sets the folder that holds your blobs and the xml. This should be the place you just chose. Make sure your `blobsaver.xml` is in this location. |
 | `-e STARTTRIGGER=(1 or 0)` | No | Sets if the container will download blobs upon startup. Useful for manually triggering. 1 will enable, 0 will disable. On by default. |
 | `-e CRONTIME=(time in cron format)` | No | Sets the interval in which the cron job runs. Defaults to every 5 minutes if not set. (`*/5 * * * *`) |
-| `-e BLOBARG=(arguments for blobsaver)` | No | Sets the arguments that Blobsaver will use when ran. Defaults to `--include-betas --background-autosave` if not set. <b>Do not use `--import=/blobsaver/blobs/blobsaver.xml` or `--save-path=/blobsaver/blobs` as they are what set the directory for host mounting.</b> |
+| `-e BLOBARG=(arguments for blobsaver)` | No | Sets the arguments that Blobsaver will use when ran. Defaults to `--include-betas --background-autosave` if not set. <b>Do not use `--import=x` or `--save-path=x` as they are what set the directory for host mounting.</b> |
 | `passivelemon/blobsaver-docker:latest` | Yes | The repository on Docker hub. By default, it is the latest version that I have published. |
 
 ## Examples:
 ### Docker run
 ```
-docker run -d --name blobsaver-docker -v /home/docker/Containers/Blobsaver-docker/:/blobsaver/blobs/ -e STARTTRIGGER='0' -e CRONTIME='*/15 * * * *' -e BLOBARG='--background-autosave' passivelemon/blobsaver-docker:latest
+docker run -d --name blobsaver-docker -v /home/docker/Containers/Blobsaver-docker/:/opt/blobsaver/blobs/ -e STARTTRIGGER='0' -e CRONTIME='*/15 * * * *' -e BLOBARG='--background-autosave' passivelemon/blobsaver-docker:latest
 ```
 ### Docker Compose
-```
+```yml
 version: '3.3'
 services:
   blobsaver-docker:
     image: passivelemon/blobsaver-docker:latest
     container_name: blobsaver-docker
     volumes:
-      - /home/docker/Containers/Blobsaver-docker/:/blobsaver/blobs/
+      - /home/docker/Containers/Blobsaver-docker/:/opt/blobsaver/blobs/
     environment:
       STARTTRIGGER: '0'
       CRONTIME: '*/15 * * * *'
