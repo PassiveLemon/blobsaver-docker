@@ -28,6 +28,6 @@ ENV VERSION=$VERSION
 
 ENV STARTTRIGGER="1"
 ENV CRONTIME="*/5 * * * *"
-ENV BLOBARG="--include-betas --background-autosave"
+ENV BLOBARG="--background-autosave"
 
 ENTRYPOINT ["/opt/blobsaver/entrypoint.sh"]
