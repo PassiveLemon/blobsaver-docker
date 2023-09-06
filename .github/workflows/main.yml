@@ -51,6 +51,6 @@ jobs:
             --platform linux/amd64 \
             --tag ${{ secrets.DOCKER_USERNAME }}/blobsaver-docker:${{ steps.get_latest_release_tag.outputs.latest_tag }} \
             --tag ${{ secrets.DOCKER_USERNAME }}/blobsaver-docker:latest \
-            --tag ghcr.io/${{ secrets.GHCR_USERNAME }}/blobsaver-docker:latest \
+            --tag ghcr.io/${{ secrets.GHCR_USERNAME }}/blobsaver-docker:${{ steps.get_latest_release_tag.outputs.latest_tag }} \
             --tag ghcr.io/${{ secrets.GHCR_USERNAME }}/blobsaver-docker:latest \
             .
