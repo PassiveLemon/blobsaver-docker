@@ -12,6 +12,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - uses: gautamkrishnar/keepalive-workflow@v1
 
       - name: Get latest release tag
         id: get_latest_release_tag
@@ -19,7 +20,7 @@ jobs:
           LATEST=$(curl -s https://api.github.com/repos/airsquared/blobsaver/releases | jq -r "[.[] | select(.tag_name)] | max_by(.created_at) | .tag_name" | awk '{gsub(/^v/, ""); print}')
           echo "Latest release is ${LATEST}"
           echo "latest_tag=$LATEST" >> "$GITHUB_OUTPUT"
-      
+
       - name: Check if version already exists
         run: |
           CHECK=$(curl -s "https://hub.docker.com/v2/repositories/passivelemon/blobsaver-docker/tags/${{ steps.get_latest_release_tag.outputs.latest_tag }}")
