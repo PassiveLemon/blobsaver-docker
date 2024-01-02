@@ -3,8 +3,6 @@ FROM docker.io/frolvlad/alpine-glibc:latest
 ARG VERSION
 
 RUN apk add --no-cache curl tar busybox-openrc
-# Alternatives for security
-RUN apk add --no-cache openssl=3.1.4-r1
 
 RUN mkdir -p /opt/blobsaver/source/ &&\
     mkdir -p /usr/local/bin/
