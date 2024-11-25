@@ -8,6 +8,9 @@
 Docker container for [Blobsaver](https://github.com/airsquared/blobsaver)</br>
 The only purpose of this container is to automatically grab blobs in the background on systems that can't really natively run blobsaver. </br>
 
+## Deprecation
+Dev does not update the project anymore. The images will stay up but I will not provide support for this project anymore.
+
 ## Setup </br>
 <b>You will need to already have a functional blobsaver.xml</b></br>
 Currently, this container does not have the ability to generate it automatically. There are ways to get this, mainly being to just see if your distro has a supported blobsaver package and generating it from that. Otherwise, if you already know the needed details for blob saving functionality with Blobsaver, you can just make the XML yourself.</br>
@@ -82,3 +85,4 @@ An example XML file is provided in the repo. Make sure to remove the comments af
 
 ## Other </br>
 If you are getting high CPU Iowait use, check and make sure the container is not continuously erroring. Personal experience here.
+
